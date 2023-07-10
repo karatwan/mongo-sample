@@ -2,15 +2,18 @@ const mongoose = require('mongoose');
 const Sandwich = require('./model');
 const generateData = require('./generate-data');
 const queries = require('./queries');
-
+const {user, password} =require('./consts');
 
 main().catch(err => console.log(err));
 
 async function main() {
-    await mongoose.connect('mongodb://localhost:27017/sandbox');
+    
+
+    const uri = `mongodb+srv://${user}:${password}@sandbox.lbrfhge.mongodb.net/`;
+    await mongoose.connect(uri); //('mongodb://localhost:27017/sandbox');
 
     // Make some sandwiches
-    // generateData();
+    generateData();
 
     // Get all sandwiches
     const all = await queries.getAllSandwiches({});
